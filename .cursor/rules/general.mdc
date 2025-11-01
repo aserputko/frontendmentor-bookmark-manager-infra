@@ -1,12 +1,15 @@
 ---
 alwaysApply: true
 ---
+
 # Cursor AI Rules - DevOps/Infrastructure Repository
 
 ## Repository Purpose
+
 This repository manages infrastructure as code (IaC) using Terraform for AWS resources, with CI/CD automation via GitHub Actions.
 
 ## Core Technologies
+
 - **Cloud Provider**: AWS
 - **IaC Tool**: Terraform (latest stable version)
 - **CI/CD**: GitHub Actions
@@ -16,12 +19,14 @@ This repository manages infrastructure as code (IaC) using Terraform for AWS res
 ## Terraform Standards
 
 ### File Organization
+
 - Use modular structure: separate environments (dev, staging, prod) into distinct directories
 - Standard file naming: `main.tf`, `variables.tf`, `outputs.tf`, `providers.tf`, `versions.tf`
 - Group related resources logically within modules
 - Use `terraform.tfvars` for environment-specific values (never commit secrets)
 
 ### Coding Practices
+
 - Always use Terraform >= 1.5.0 features (native test framework, import blocks)
 - Pin provider versions explicitly in `versions.tf`
 - Use `terraform fmt` for consistent formatting
@@ -32,6 +37,7 @@ This repository manages infrastructure as code (IaC) using Terraform for AWS res
 - Tag all resources with: Environment, Project, ManagedBy (Terraform), Owner, CostCenter
 
 ### Variables and Outputs
+
 - Define comprehensive variable descriptions
 - Use validation blocks for input constraints
 - Set sensible defaults where appropriate
@@ -39,6 +45,7 @@ This repository manages infrastructure as code (IaC) using Terraform for AWS res
 - Document all outputs with descriptions
 
 ### Security Best Practices
+
 - Never commit AWS credentials or secrets to version control
 - Use AWS IAM roles with least privilege principle
 - Scan code with `tfsec` for security vulnerabilities
@@ -50,6 +57,7 @@ This repository manages infrastructure as code (IaC) using Terraform for AWS res
 ## AWS Best Practices
 
 ### Resource Management
+
 - Use AWS Organizations for multi-account strategy
 - Implement cost allocation tags on all resources
 - Enable CloudTrail logging in all regions
@@ -58,6 +66,7 @@ This repository manages infrastructure as code (IaC) using Terraform for AWS res
 - Implement proper IAM policies with conditions
 
 ### High Availability & Reliability
+
 - Deploy across multiple availability zones
 - Use Auto Scaling Groups where appropriate
 - Implement health checks and monitoring
@@ -65,6 +74,7 @@ This repository manages infrastructure as code (IaC) using Terraform for AWS res
 - Use Application Load Balancers for traffic distribution
 
 ### Cost Optimization
+
 - Use appropriate instance types and sizes
 - Implement auto-scaling policies
 - Leverage Reserved Instances and Savings Plans for predictable workloads
@@ -74,6 +84,7 @@ This repository manages infrastructure as code (IaC) using Terraform for AWS res
 ## GitHub Actions Standards
 
 ### Workflow Structure
+
 - Use reusable workflows for common patterns
 - Implement proper secret management with GitHub Secrets
 - Use environment protection rules for production deployments
@@ -81,6 +92,7 @@ This repository manages infrastructure as code (IaC) using Terraform for AWS res
 - Cache Terraform plugins to speed up runs
 
 ### CI/CD Pipeline Stages
+
 1. **Validation**: `terraform fmt -check`, `terraform validate`, `tflint`
 2. **Security Scanning**: `tfsec`, `checkov`
 3. **Plan**: `terraform plan` with output artifact
@@ -89,6 +101,7 @@ This repository manages infrastructure as code (IaC) using Terraform for AWS res
 6. **Documentation**: Auto-generate README with terraform-docs
 
 ### Workflow Best Practices
+
 - Use matrix strategy for multi-environment deployments
 - Implement drift detection on schedule
 - Store Terraform plan artifacts for review
@@ -99,6 +112,7 @@ This repository manages infrastructure as code (IaC) using Terraform for AWS res
 ## Code Review Guidelines
 
 ### Pull Request Requirements
+
 - All PRs must include `terraform plan` output in comments
 - Security scan results must pass before merge
 - At least one approval required from team members
@@ -106,6 +120,7 @@ This repository manages infrastructure as code (IaC) using Terraform for AWS res
 - PR description must explain infrastructure changes and impact
 
 ### Review Checklist
+
 - [ ] Code follows Terraform style guide
 - [ ] All resources properly tagged
 - [ ] Security scan passes (tfsec/checkov)
@@ -120,6 +135,7 @@ This repository manages infrastructure as code (IaC) using Terraform for AWS res
 ## Documentation Standards
 
 ### Required Documentation
+
 - README.md in each module/environment with:
   - Purpose and scope
   - Prerequisites
@@ -132,6 +148,7 @@ This repository manages infrastructure as code (IaC) using Terraform for AWS res
 - Change log for major infrastructure modifications
 
 ### Comments and Annotations
+
 - Explain complex logic or non-obvious decisions
 - Document why specific configurations are chosen
 - Link to relevant AWS documentation or RFCs
@@ -140,6 +157,7 @@ This repository manages infrastructure as code (IaC) using Terraform for AWS res
 ## Git Workflow
 
 ### Branch Strategy
+
 - `main` branch: production-ready code
 - `develop` branch: integration branch for features
 - Feature branches: `feature/<description>`
@@ -147,6 +165,7 @@ This repository manages infrastructure as code (IaC) using Terraform for AWS res
 - Environment branches (if needed): `env/<environment>`
 
 ### Commit Messages
+
 - Use conventional commits format: `type(scope): description`
 - Types: feat, fix, docs, refactor, test, chore
 - Include ticket/issue numbers when applicable
@@ -155,6 +174,7 @@ This repository manages infrastructure as code (IaC) using Terraform for AWS res
 ## Testing Strategy
 
 ### Automated Testing
+
 - Use Terraform's native test framework for integration tests
 - Implement `terraform-compliance` for policy-as-code testing
 - Run tests in isolated AWS accounts/environments
@@ -162,6 +182,7 @@ This repository manages infrastructure as code (IaC) using Terraform for AWS res
 - Validate `terraform plan` output in CI pipeline
 
 ### Manual Testing
+
 - Test in dev environment first
 - Verify changes in staging before production
 - Document test results in PR
@@ -170,12 +191,14 @@ This repository manages infrastructure as code (IaC) using Terraform for AWS res
 ## Monitoring and Observability
 
 ### CloudWatch Integration
+
 - Create dashboards for infrastructure metrics
 - Set up alarms for critical thresholds
 - Use CloudWatch Logs Insights for log analysis
 - Implement composite alarms for complex scenarios
 
 ### Infrastructure Monitoring
+
 - Monitor Terraform state file changes
 - Track drift between actual and desired state
 - Alert on failed GitHub Actions workflows
@@ -184,12 +207,14 @@ This repository manages infrastructure as code (IaC) using Terraform for AWS res
 ## Emergency Procedures
 
 ### Rollback Strategy
+
 - Keep previous Terraform state versions
 - Document rollback procedures for each major change
 - Maintain ability to quickly revert to last known good state
 - Test rollback procedures regularly
 
 ### Incident Response
+
 - Access to AWS console for emergency manual changes
 - Document all manual changes made during incidents
 - Create follow-up tasks to codify emergency changes in Terraform
@@ -198,18 +223,21 @@ This repository manages infrastructure as code (IaC) using Terraform for AWS res
 ## Modern DevOps Practices
 
 ### Infrastructure as Code Principles
+
 - Everything in version control
 - Immutable infrastructure preferred over mutable
 - Use blue-green or canary deployment strategies where applicable
 - Implement GitOps workflows
 
 ### Automation Philosophy
+
 - Automate repetitive tasks
 - Self-service infrastructure provisioning via PRs
 - Automated compliance checking
 - Automated documentation generation
 
 ### Continuous Improvement
+
 - Regular dependency updates (Terraform, providers, actions)
 - Periodic security audits
 - Cost optimization reviews
@@ -218,6 +246,7 @@ This repository manages infrastructure as code (IaC) using Terraform for AWS res
 ## Tools and Utilities
 
 ### Required Tools
+
 - `terraform` (latest stable)
 - `tflint` (Terraform linter)
 - `tfsec` (security scanner)
@@ -226,6 +255,7 @@ This repository manages infrastructure as code (IaC) using Terraform for AWS res
 - `pre-commit` (Git hooks framework)
 
 ### Recommended Tools
+
 - `terragrunt` (DRY Terraform configurations)
 - `checkov` (additional security scanning)
 - `infracost` (cost estimation)
@@ -235,18 +265,21 @@ This repository manages infrastructure as code (IaC) using Terraform for AWS res
 ## Environment-Specific Considerations
 
 ### Development
+
 - Use smaller instance types
 - Implement auto-shutdown for cost savings
 - Allow more permissive access for testing
 - Shorter retention periods for logs
 
 ### Staging
+
 - Mirror production architecture
 - Use production-like data (anonymized)
 - Test disaster recovery procedures
 - Validate monitoring and alerting
 
 ### Production
+
 - Multi-AZ deployment mandatory
 - Enhanced monitoring and alerting
 - Strict access controls and audit logging
