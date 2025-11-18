@@ -32,3 +32,26 @@ variable "cost_center" {
   default     = "engineering"
 }
 
+variable "vpc_cidr" {
+  description = "CIDR block for the VPC"
+  type        = string
+  default     = "12.0.0.0/16"
+}
+
+variable "availability_zones" {
+  description = "Number of availability zones to use"
+  type        = number
+  default     = 2
+
+  validation {
+    condition     = var.availability_zones >= 2 && var.availability_zones <= 3
+    error_message = "Availability zones must be between 2 and 3"
+  }
+}
+
+variable "enable_vpc_flow_logs" {
+  description = "Enable VPC Flow Logs"
+  type        = bool
+  default     = true
+}
+
