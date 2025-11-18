@@ -1,0 +1,17 @@
+# Example backend configuration
+# Copy this file to backend.tf and configure with your S3 bucket and DynamoDB table
+# DO NOT commit backend.tf with actual credentials
+
+terraform {
+  backend "s3" {
+    bucket         = "your-terraform-state-bucket"
+    key            = "roadmap-bookmark-manager/terraform.tfstate"
+    region         = "us-east-1"
+    encrypt        = true
+    dynamodb_table = "terraform-state-lock"
+    
+    # Optional: Use different key per environment
+    # key = "roadmap-bookmark-manager/${var.environment}/terraform.tfstate"
+  }
+}
+

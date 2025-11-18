@@ -1,0 +1,10 @@
+# Example terraform.tfvars file
+# Copy this file to terraform.tfvars and customize for your environment
+# DO NOT commit terraform.tfvars files to version control
+
+environment  = "dev"
+aws_region   = "us-east-1"
+project_name = "roadmap-bookmark-manager"
+owner        = "devops"
+cost_center  = "engineering"
+
